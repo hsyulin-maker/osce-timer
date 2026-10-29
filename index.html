@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f3faff">
+  <meta name="description" content="OSCE 考官手機計時器：讀題 1 分鐘、作答 8 分鐘、第 7 分鐘提醒、回饋 2 分鐘，自動換站讀題。">
+  <title>OSCE 考官計時器</title>
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="pediatric.css">
+</head>
+<body class="pediatric-theme">
+  <svg class="svg-defs" aria-hidden="true"><defs>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.5M9 2h6M12 2v3M18.5 6.5l1.5-1.5"/></symbol>
+    <symbol id="i-expand" viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></symbol>
+    <symbol id="i-reset" viewBox="0 0 24 24"><path d="M3 10a9 9 0 1 1 1 7M3 4v6h6"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="m9 5 11 7-11 7z" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14" stroke-width="4"/></symbol>
+    <symbol id="i-volume" viewBox="0 0 24 24"><path d="m11 4-6 5H2v6h3l6 5zM16 8a6 6 0 0 1 0 8M19 5a10 10 0 0 1 0 14"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-5-5 5 5-5 5"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1 1m12 12 1 1M5 19l1-1M18 6l1-1"/></symbol>
+  </defs></svg>
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="OSCE 計時器首頁"><span class="brand-symbol"><svg><use href="#i-clock"/></svg></span><span>OSCE<span class="brand-separator">/</span><span class="brand-sub">兒童照護</span></span></a>
+      <button id="fullscreen" class="quiet-button" title="切換全螢幕"><svg><use href="#i-expand"/></svg><span>全螢幕</span></button>
+    </header>
+    <main>
+      <div class="page-intro"><div><p class="eyebrow">兒童醫院・臨床教學</p><h1>OSCE 考官計時器</h1><p class="intro-copy" id="intro-copy">溫柔照護，專注每一站。</p></div><div class="care-illustration" aria-hidden="true"><span class="little-star star-one"></span><span class="little-star star-two"></span><span class="soft-cloud"></span><div class="care-bear"><i class="bear-ear ear-left"></i><i class="bear-ear ear-right"></i><div class="bear-face"><span class="bear-eyes"></span><span class="bear-cheeks"></span><span class="bear-muzzle"><i></i></span></div><span class="bear-cap"><i></i></span></div></div></div>
+      <div class="workspace">
+        <section class="timer-card" aria-label="考試倒數計時器">
+          <div class="timer-top"><span class="status-pill" id="status"><span></span><span id="status-text">準備就緒</span></span><span class="timer-top-caption" id="timer-caption">第 3 站・第 1 輪</span></div>
+          <div class="station-context"><strong id="station-topic">腹部身體檢查</strong><span id="student-caption">學員 A</span></div>
+          <div class="dial" id="dial">
+            <svg class="dial-ring" viewBox="0 0 320 320" aria-hidden="true"><circle class="dial-track" cx="160" cy="160" r="145"/><circle id="dial-progress" class="dial-progress" cx="160" cy="160" r="145" pathLength="100"/><circle class="dial-marker" cx="22.1" cy="115.2" r="4"/></svg>
+            <div class="dial-content"><span class="phase-label" id="phase-label">讀題時間</span><div class="time" id="time" role="timer" aria-label="剩餘 1 分鐘">01:00</div><div class="dial-message" id="dial-message"><span class="tiny-dot"></span>準備好後，開始計時</div></div>
+          </div>
+          <div class="timer-notice" id="timer-notice">時間交給這裡，專心完成每一步。</div>
+          <div class="timer-controls"><button class="primary-button" id="start"><svg><use id="start-icon" href="#i-play"/></svg><span id="start-label">開始本站讀題</span></button><button class="reset-button" id="reset" aria-label="重設計時器" title="重設計時器"><svg><use href="#i-reset"/></svg></button></div>
+          <div class="timer-footer"><span>考試已過 <strong id="elapsed">00:00</strong></span><span id="total-line">考試剩餘 <strong>10:00</strong></span></div>
+        </section>
+        <aside class="side-panel">
+          <details class="identity-card"><summary>考站與學員設定</summary><div class="identity-fields"><label>考站編號<input id="station-number" type="number" inputmode="numeric" min="1" max="999" value="3"></label><label>考站名稱<input id="station-name" type="text" maxlength="40" value="腹部身體檢查"></label><label>學員<input id="student-name" type="text" maxlength="40" value="學員 A"></label></div></details>
+          <details class="flow-card">
+            <summary id="flow-title">時間安排：8＋2 分鐘</summary>
+            <div class="timeline" id="timeline"></div>
+            <div class="total-row"><span>本站考試時間</span><strong>10 <small>分鐘</small></strong></div>
+            <div id="reading-separate" class="reading-separate"><div><b>轉場＋讀下一題</b><small>另計，不包含在考試 10 分鐘內</small></div><strong>01:00</strong></div>
+            <p class="field-hint">首站先讀題 1 分鐘。回饋結束後，自動換站並讀下一題，共 1 分鐘，再開始下一站作答。</p>
+          </details>
+          <details class="settings-card"><summary id="settings-title">提示音與螢幕設定</summary>
+            <label class="setting-row"><span class="setting-copy"><span>提示音</span><small>時間提醒與結束響鈴</small></span><input type="checkbox" id="sound" role="switch" checked><span class="switch" aria-hidden="true"></span></label>
+            <label class="setting-row"><span class="setting-copy"><span>語音提醒</span><small>播報階段切換與「剩下 1 分鐘」</small></span><input type="checkbox" id="voice" role="switch"><span class="switch" aria-hidden="true"></span></label>
+            <label class="setting-row"><span class="setting-copy"><span>保持螢幕常亮</span><small id="wake-description">計時時盡量避免螢幕休眠</small></span><input type="checkbox" id="awake" role="switch" checked><span class="switch" aria-hidden="true"></span></label>
+            <button id="test-sound" class="test-sound"><svg><use href="#i-volume"/></svg>測試提醒<span>試聽<svg><use href="#i-arrow"/></svg></span></button>
+          </details>
+        </aside>
+      </div>
+      <div class="usage-note"><span class="note-icon"><svg><use href="#i-sun"/></svg></span><p>手機使用時，請保持頁面開啟並確認音量。鎖定螢幕或切到背景時，提示音可能受系統限制。</p><span class="keyboard-hint"><kbd>空白鍵</kbd> 開始 / 暫停</span></div>
+    </main>
+    <footer class="site-footer"><span>第 5 版・兒童醫院風格</span><span>© 2026 林湘瑜。版權所有。</span></footer>
+  </div>
+  <dialog id="reset-dialog"><form method="dialog"><div class="dialog-icon"><svg><use href="#i-reset"/></svg></div><h2>重設全部計時？</h2><p>輪次與進度將歸零，回到第 1 輪讀題。考站與學員設定會保留。</p><div class="dialog-actions"><button value="cancel" class="dialog-cancel" autofocus>取消</button><button value="reset" class="dialog-confirm">重設計時</button></div></form></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <div id="announcement" class="visually-hidden" aria-live="assertive" aria-atomic="true"></div>
+  <script type="module" src="app.mjs"></script>
+</body>
+</html>

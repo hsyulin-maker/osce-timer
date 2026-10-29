@@ -1,0 +1,190 @@
+/* 兒童醫院主題：CSS 變數、漸層、偽元素與純 CSS 小熊，無外部素材。 */
+.pediatric-theme {
+  --sky: #eaf5fd;
+  --sky-deep: #326e9c;
+  --mint: #eaf7ef;
+  --mint-deep: #387759;
+  --peach: #fff1e7;
+  --honey: #f5cf7c;
+  --ink: #2a455d;
+  --muted: #62798b;
+  --line: #e4edf1;
+  --green: #34749f;
+  color: var(--ink);
+  background:
+    radial-gradient(ellipse at 5% 5%, #e8f5ff 0, transparent 42%),
+    radial-gradient(ellipse at 100% 50%, #edf8ef 0, transparent 38%),
+    linear-gradient(155deg, #fffefb, #f8fcff 60%, #fffaf5);
+  background-attachment: fixed;
+}
+
+.pediatric-theme .page-shell { max-width: 730px; padding-top: 8px; }
+.pediatric-theme .site-header { height: 70px; }
+.pediatric-theme .brand { color: #486c87; font-weight: 650; }
+.pediatric-theme .brand-symbol {
+  width: 39px; height: 39px; border-radius: 14px;
+  color: #367997; background: #e3f1f9; border: 1px solid #d4e7f3;
+  transform: rotate(-7deg);
+}
+.pediatric-theme .brand-symbol svg { transform: rotate(7deg); }
+.pediatric-theme .brand-sub { color: #658378; font-size: 17px; }
+.pediatric-theme .quiet-button {
+  border-radius: 16px; padding: 9px 12px; background: #ffffffb3;
+  color: #5b778a; border: 1px solid #e1edf3;
+}
+.pediatric-theme .quiet-button:hover { background: #eaf5fd; }
+.pediatric-theme .page-intro {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; margin: 22px 0 27px; min-height: 116px;
+}
+.pediatric-theme .page-intro > div:first-child { position: relative; z-index: 1; }
+.pediatric-theme .eyebrow {
+  display: inline-block; margin: 0 0 10px; padding: 5px 11px;
+  background: #e5f4ec; border-radius: 9px; color: #507d67;
+  font-size: 15px; font-weight: 500; letter-spacing: 1px;
+}
+.pediatric-theme h1 { font-size: 29px; font-weight: 650; letter-spacing: .4px; color: #2b4e69; }
+.pediatric-theme .intro-copy { display: block; font-size: 17px; color: #72899a; margin: 9px 0 0; }
+
+/* 柔和、靜態的小熊與雲朵，裝飾不介入操作或倒數。 */
+.care-illustration { position: relative; width: 130px; height: 122px; flex: 0 0 130px; }
+.soft-cloud {
+  position: absolute; right: -4px; bottom: 4px; width: 126px; height: 36px;
+  border-radius: 50px; background: #fff; box-shadow: 0 5px 12px #537e9d09;
+}
+.soft-cloud::before, .soft-cloud::after { content: ''; position: absolute; background: #fff; border-radius: 50%; }
+.soft-cloud::before { width: 51px; height: 51px; top: -22px; left: 23px; }
+.soft-cloud::after { width: 38px; height: 38px; top: -15px; right: 17px; }
+.care-bear { position: absolute; width: 88px; height: 87px; top: 14px; left: 20px; transform: rotate(5deg); }
+.bear-ear { position: absolute; top: 8px; width: 29px; height: 29px; border-radius: 50%; background: #f2d2ad; border: 6px solid #f8dfc3; }
+.ear-left { left: -2px; } .ear-right { right: -2px; }
+.bear-face { position: absolute; inset: 20px 4px 0; border-radius: 43% 43% 46% 46%; background: linear-gradient(135deg, #ffe9cf, #f3d5b3); box-shadow: inset 0 -3px 0 #eac6a444; }
+.bear-eyes { position: absolute; left: 24px; top: 24px; width: 5px; height: 6px; border-radius: 50%; background: #715c54; box-shadow: 28px 0 #715c54; }
+.bear-cheeks { position: absolute; left: 12px; top: 34px; width: 13px; height: 7px; border-radius: 50%; background: #efb9ac88; box-shadow: 43px 0 #efb9ac88; }
+.bear-muzzle { position: absolute; left: 27px; top: 33px; width: 27px; height: 21px; border-radius: 50%; background: #fff4e4; }
+.bear-muzzle::before { content: ''; position: absolute; width: 7px; height: 5px; border-radius: 50% 50% 45% 45%; background: #9c7865; left: 10px; top: 4px; }
+.bear-muzzle i { position: absolute; width: 9px; height: 6px; border-bottom: 1.5px solid #a88776; border-radius: 50%; left: 9px; top: 9px; }
+.bear-cap { position: absolute; top: 3px; left: 19px; width: 51px; height: 30px; border-radius: 14px 14px 5px 5px; background: linear-gradient(#fff, #f4fcff); border: 1px solid #dfeef2; transform: rotate(-6deg); }
+.bear-cap::before, .bear-cap::after { content: ''; position: absolute; background: #72b6a4; border-radius: 2px; left: 21px; top: 7px; width: 7px; height: 16px; }
+.bear-cap::after { width: 16px; height: 7px; left: 17px; top: 11px; }
+.little-star { position: absolute; width: 15px; height: 15px; background: #efce7c; clip-path: polygon(50% 0, 64% 35%, 100% 50%, 64% 64%, 50% 100%, 35% 64%, 0 50%, 35% 35%); }
+.star-one { left: 3px; top: 19px; transform: rotate(13deg); }
+.star-two { right: 0; top: 42px; width: 12px; height: 12px; background: #9bc8d9; }
+
+.pediatric-theme .workspace { gap: 19px; }
+.pediatric-theme .timer-card {
+  position: relative; padding: 24px 26px 0; border-radius: 29px;
+  border: 1px solid #dfeaf1; background: #fff;
+  box-shadow: 0 12px 35px #507b9510, 0 2px 3px #507b9505;
+}
+.pediatric-theme .timer-card::before {
+  content: ''; position: absolute; top: -1px; left: 30px; right: 30px; height: 5px;
+  border-radius: 0 0 10px 10px; background: linear-gradient(90deg, #b5ddeb, #b5dfca 48%, #f3d5b9);
+}
+.pediatric-theme .status-pill { padding: 5px 10px; border-radius: 10px; background: #f0f6f9; color: #617b90; font-size: 16px; }
+.pediatric-theme .status-pill.running { color: #387759; background: #eaf7ef; }
+.pediatric-theme .status-pill.running > span:first-child { background: #5aa385; }
+.pediatric-theme .status-pill.paused { background: #fff6e7; color: #986c24; }
+.pediatric-theme .timer-top-caption { font-size: 16px; color: #72879a; }
+.pediatric-theme .station-context { margin-top: 25px; gap: 8px; }
+.pediatric-theme .station-context strong { color: #365b75; font-size: 28px; font-weight: 550; }
+.pediatric-theme .station-context > span { color: #748b9c; font-size: 19px; }
+.pediatric-theme .dial { margin-top: 24px; }
+.pediatric-theme .phase-label { background: #edf5fd; border-radius: 11px; padding: 5px 15px; font-size: 19px; color: #4f7da0; margin-bottom: 3px; }
+.pediatric-theme .time { color: #2d5876; font-weight: 600; letter-spacing: -4px; }
+.pediatric-theme .dial-message { color: #70879a; font-size: 16px; }
+.pediatric-theme .timer-notice { color: #667d8b; margin: 17px 0 22px; font-size: 17px; }
+.pediatric-theme .primary-button {
+  background: linear-gradient(120deg, #3f83af, #39769f); border-radius: 18px;
+  border-bottom: 4px solid #2b658d; min-height: 65px; font-size: 21px;
+  box-shadow: 0 5px 10px #528eaf12; transition: transform .15s, box-shadow .15s;
+}
+.pediatric-theme .primary-button:hover { background: linear-gradient(120deg, #397ba6, #326b92); transform: translateY(-1px); box-shadow: 0 7px 14px #528eaf22; }
+.pediatric-theme .primary-button:active { transform: translateY(2px); border-bottom-width: 2px; }
+.pediatric-theme .reset-button { border-radius: 18px; border-color: #dfeaf1; color: #7794a5; background: #f8fbfe; }
+.pediatric-theme .reset-button:hover:not(:disabled) { background: #ecf5fc; }
+.pediatric-theme .timer-footer { margin-top: 17px; padding: 17px 0 21px; border-top: 1px dashed #dce8ef; border-bottom: 0; color: #7b8d9a; font-size: 16px; }
+.pediatric-theme .timer-footer strong { color: #3f6076; font-size: 19px; }
+.pediatric-theme .side-panel { gap: 10px; }
+.pediatric-theme .side-panel > details { background: #ffffffcf; border: 1px solid #e1ebf0; border-radius: 18px; padding: 0 19px; }
+.pediatric-theme .side-panel summary { justify-content: flex-start; color: #577388; min-height: 63px; font-size: 18px; }
+.pediatric-theme .side-panel summary::after { margin-left: auto; color: #93acba; font-size: 24px; }
+.pediatric-theme .side-panel summary::before { content: '✦'; display: grid; place-items: center; width: 30px; height: 30px; flex: 0 0 30px; margin-right: 12px; background: #fff0e4; color: #bf9478; font-size: 18px; border-radius: 10px; }
+.pediatric-theme .side-panel .flow-card summary::before { content: '◷'; background: #eaf6ef; color: #6b9e87; font-size: 22px; }
+.pediatric-theme .side-panel .settings-card summary::before { content: '♪'; background: #edf2fd; color: #899fc5; font-size: 21px; }
+.pediatric-theme .identity-fields input { border-color: #dce9f0; border-radius: 12px; background: #fbfdff; color: #34546a; }
+.pediatric-theme .identity-fields label, .pediatric-theme .setting-copy > span { color: #536f84; }
+.pediatric-theme .switch { background: #e0eaf0; }
+.pediatric-theme .setting-row input:checked + .switch { background: #6ba990; }
+.pediatric-theme .test-sound { color: #4381a6; }
+.pediatric-theme .reading-separate { border-top-style: dashed; }
+.pediatric-theme .reading-separate.active > strong { color: #478a75; }
+.pediatric-theme .usage-note { padding: 0 8px; color: #7c8f9d; }
+.pediatric-theme .site-footer { color: #7a8b99; border-top: 0; padding-top: 10px; gap: 4px; }
+.pediatric-theme .site-footer::before { content: '✦'; font-size: 18px; color: #d9bf89; margin-bottom: 6px; }
+.pediatric-theme .toast { background: #f0f8ff; border-color: #cfe2f0; color: #3f6c8a; border-radius: 16px; }
+.pediatric-theme dialog { border-radius: 24px; border-color: #d7e7f0; color: #34566e; box-shadow: 0 18px 80px #45677e22; }
+.pediatric-theme .dialog-cancel { background: #eef5f9; color: #617e94; border-radius: 13px; }
+.pediatric-theme .dialog-confirm { background: #3b7ca6; border-radius: 13px; }
+.pediatric-theme .timer-card.warning { border-color: #edce93; }
+.pediatric-theme .timer-card.warning::before { background: #efd398; }
+.pediatric-theme .timer-card.warning .time { color: #a56c1e; }
+.pediatric-theme .timer-card.warning .phase-label { background: #fff5df; color: #9a6e2b; }
+.pediatric-theme .timer-card[data-phase='feedback'] { border-color: #e8b6bb; background: #fffdfd; }
+.pediatric-theme .timer-card[data-phase='feedback']::before { background: #e9b0b8; }
+.pediatric-theme .timer-card[data-phase='feedback'] .time,
+.pediatric-theme .timer-card[data-phase='feedback'] .timer-notice { color: #b8424e; }
+.pediatric-theme .timer-card[data-phase='feedback'] .phase-label { background: #fff0f1; color: #b24b55; }
+.pediatric-theme .timer-card[data-phase='feedback'] .status-pill { background: #fff0f1; color: #b24b55; }
+.pediatric-theme .page-shell:fullscreen { background: #f6fbfe; }
+
+@media (max-width: 480px) {
+  .pediatric-theme .page-shell { padding: 0 16px 24px; }
+  .pediatric-theme .site-header { height: 65px; }
+  .pediatric-theme .brand { font-size: 17px; gap: 8px; }
+  .pediatric-theme .brand-symbol { width: 32px; height: 35px; border-radius: 12px; }
+  .pediatric-theme .brand-sub { font-size: 16px; }
+  .pediatric-theme .quiet-button { padding: 8px 9px; font-size: 15px; }
+  .pediatric-theme .quiet-button svg { width: 16px; }
+  .pediatric-theme .page-intro { gap: 4px; margin: 13px 0 20px; min-height: 109px; }
+  .pediatric-theme h1 { font-size: 23px; letter-spacing: -.3px; }
+  .pediatric-theme .eyebrow { font-size: 14px; margin-bottom: 8px; padding: 4px 8px; letter-spacing: .5px; }
+  .pediatric-theme .intro-copy { font-size: 16px; margin-top: 7px; }
+  .care-illustration { width: 91px; height: 108px; flex-basis: 91px; transform: scale(.87); transform-origin: right center; }
+  .care-bear { left: 2px; }
+  .soft-cloud { width: 100px; right: -8px; }
+  .star-one { left: -7px; top: 10px; }
+  .star-two { right: -4px; top: 31px; }
+  .pediatric-theme .timer-card { border-radius: 25px; padding: 19px 18px 0; }
+  .pediatric-theme .timer-top { gap: 8px; }
+  .pediatric-theme .status-pill { font-size: 15px; padding: 5px 8px; }
+  .pediatric-theme .timer-top-caption { font-size: 15px; }
+  .pediatric-theme .station-context { margin-top: 21px; }
+  .pediatric-theme .station-context strong { font-size: 26px; }
+  .pediatric-theme .dial { margin-top: 20px; }
+  .pediatric-theme .time { font-size: clamp(88px, 25.7vw, 119px); }
+  .pediatric-theme .phase-label { font-size: 19px; }
+  .pediatric-theme .timer-notice { font-size: 16px; line-height: 1.7; margin: 14px 0 19px; }
+  .pediatric-theme .primary-button { min-height: 62px; font-size: 21px; }
+  .pediatric-theme .reset-button { min-height: 62px; width: 59px; }
+  .pediatric-theme .timer-controls { gap: 10px; }
+  .pediatric-theme .side-panel > details { padding: 0 14px; }
+  .pediatric-theme .side-panel summary { font-size: 17px; }
+  .pediatric-theme .side-panel summary::before { width: 27px; height: 27px; flex-basis: 27px; margin-right: 10px; }
+}
+@media (max-width: 350px) {
+  .pediatric-theme .page-shell { padding-left: 12px; padding-right: 12px; }
+  .pediatric-theme .timer-card { padding-left: 14px; padding-right: 14px; }
+  .pediatric-theme h1 { font-size: 21px; }
+  .care-illustration { width: 76px; flex-basis: 76px; transform: scale(.75); }
+  .pediatric-theme .timer-top-caption { font-size: 14px; }
+  .pediatric-theme .side-panel summary { font-size: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pediatric-theme *, .pediatric-theme *::before, .pediatric-theme *::after { animation: none !important; transition: none !important; }
+}
+@media print {
+  .pediatric-theme { background: #fff; }
+  .care-illustration, .quiet-button, .timer-controls { display: none; }
+  .pediatric-theme .timer-card { box-shadow: none; }
+}

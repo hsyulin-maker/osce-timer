@@ -1,0 +1,638 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f3faff">
+  <meta name="description" content="OSCE 考官手機計時器：讀題 1 分鐘、作答 8 分鐘、第 7 分鐘提醒、回饋 2 分鐘，自動換站讀題。">
+  <title>OSCE 考官計時器</title>
+  
+  <style>:root{font-family:system-ui,-apple-system,"Microsoft JhengHei",sans-serif;color:#20342d;background:#fff;font-size:18px;font-synthesis:none;--line:#e8eeea;--green:#287b5e;--muted:#65766c}
+*{box-sizing:border-box}body{margin:0}button,input,select{font:inherit}button,input,summary,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent}button,summary{cursor:pointer}button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid #80bca1;outline-offset:4px}svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}.svg-defs{position:absolute;width:0;height:0;overflow:hidden}.page-shell{width:100%;max-width:680px;padding:0 28px 24px;margin:auto}.site-header{height:72px;display:flex;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center;gap:9px;color:#3b5a4a;text-decoration:none;font-size:18px;font-weight:600}.brand-symbol{display:grid;place-items:center;color:var(--green)}.brand-separator{margin:0 8px;color:#a2b1a7;font-weight:400}.brand-sub{font-weight:400}.quiet-button{display:flex;align-items:center;gap:8px;border:0;background:none;color:var(--muted);font-size:16px;min-height:44px;padding:8px 0 8px 12px}.quiet-button svg{width:18px;height:18px}.page-intro{margin:16px 0 28px}h1{font-size:25px;font-weight:600;margin:0;letter-spacing:.3px}.eyebrow,.intro-copy,.session-tag{display:none}.workspace{display:flex;flex-direction:column;gap:28px}.timer-card{width:100%;padding:0;display:flex;flex-direction:column;align-items:center;background:#fff;border-radius:0;box-shadow:none;transition:color .2s}.timer-top{display:flex;justify-content:space-between;align-items:center;width:100%;gap:12px}.status-pill{display:flex;gap:8px;align-items:center;font-size:16px;color:#60796a;white-space:nowrap}.status-pill>span:first-child{width:7px;height:7px;border-radius:50%;background:#a6b6ac}.status-pill.running{color:var(--green)}.status-pill.running>span:first-child{background:var(--green)}.status-pill.paused{color:#9c6714}.status-pill.paused>span:first-child{background:#bf8429}.timer-top-caption{font-size:16px;color:var(--muted);text-align:right}.station-context{margin:24px 0 0;display:flex;flex-direction:column;gap:7px;text-align:center;overflow-wrap:anywhere;max-width:100%}.station-context strong{font-size:27px;font-weight:500;line-height:1.4}.station-context>span{color:var(--muted);font-size:19px}.dial{width:100%;margin:24px 0 0}.dial-ring{display:none}.dial-content{display:flex;flex-direction:column;align-items:center}.phase-label{font-size:20px;color:#526a5c;margin-bottom:5px}.time{font-family:ui-sans-serif,system-ui,sans-serif;font-size:clamp(92px,25vw,132px);line-height:1.15;font-weight:600;letter-spacing:-5px;font-variant-numeric:tabular-nums;white-space:nowrap;color:#18382a}.dial-message{font-size:16px;line-height:1.6;color:var(--muted);text-align:center;margin-top:7px}.tiny-dot{display:none}.timer-notice{font-size:17px;line-height:1.6;color:#607366;text-align:center;min-height:28px;margin:20px 0}.timer-controls{display:flex;gap:12px;width:100%}.primary-button{border:0;border-radius:10px;flex:1;min-height:64px;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;gap:10px;font-size:21px;font-weight:600}.primary-button:hover{background:#21674e}.primary-button:active{transform:translateY(1px)}.reset-button{border:1px solid #dae4dc;border-radius:10px;background:#fff;color:#567061;min-height:64px;width:64px;display:grid;place-items:center}.reset-button:disabled{opacity:.35;cursor:default}.reset-button:hover:not(:disabled){background:#f3f7f4}.timer-footer{border-bottom:1px solid var(--line);padding:20px 0 24px;display:flex;justify-content:space-between;width:100%;color:var(--muted);font-size:16px;gap:14px}.timer-footer>span{display:flex;align-items:center;gap:8px}.timer-footer strong{font-size:18px;font-weight:500;font-variant-numeric:tabular-nums;color:#344b3d}.side-panel{display:flex;flex-direction:column;gap:0}.side-panel>details{border:0;border-bottom:1px solid var(--line);border-radius:0;background:#fff;padding:0}.side-panel summary{padding:17px 0;min-height:58px;font-size:18px;color:#496253;font-weight:500;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:10px}.side-panel summary::-webkit-details-marker{display:none}.side-panel summary::after{content:'＋';font-size:23px;font-weight:300;color:#819386}.side-panel details[open]>summary::after{content:'－'}.identity-fields{display:grid;gap:18px;padding:4px 0 24px}.identity-fields label{display:grid;gap:8px;font-size:17px;color:#526a5b}.identity-fields input{min-width:0;width:100%;min-height:50px;border:1px solid #d8e3da;border-radius:7px;background:#fff;padding:10px 12px;font-size:19px;color:#233e2d}.timeline{padding:4px 0 0}.timeline-step{display:flex;align-items:flex-start;gap:12px;padding:14px 0}.step-number{color:#8e9d92;font-size:16px;padding-top:2px}.step-copy{flex:1}.step-copy b{display:block;font-size:19px;font-weight:500}.step-copy small{display:block;font-size:16px;line-height:1.7;color:var(--muted);margin-top:5px}.step-time{font-size:20px;font-variant-numeric:tabular-nums}.timeline-step.active .step-time{color:var(--green);font-weight:600}.total-row{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding:18px 0;font-size:17px}.total-row strong{font-size:24px;font-weight:500}.total-row small{font-size:17px}.reading-separate{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 0;border-top:1px solid var(--line)}.reading-separate b{display:block;font-size:18px;font-weight:500}.reading-separate small{display:block;font-size:16px;color:var(--muted);line-height:1.7;margin-top:5px}.reading-separate>strong{font-size:20px;font-weight:500;font-variant-numeric:tabular-nums}.reading-separate.active>strong{color:var(--green)}.field-hint{font-size:16px;line-height:1.8;color:var(--muted);margin:8px 0 22px}.setting-row{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:88px;position:relative;cursor:pointer}.setting-copy>span{display:block;font-size:19px}.setting-copy small{display:block;font-size:16px;line-height:1.6;color:var(--muted);margin-top:6px}.setting-row input{position:absolute;opacity:0;width:48px;height:44px;right:0;cursor:pointer}.switch{width:44px;height:26px;border-radius:20px;background:#dce4dd;position:relative;flex-shrink:0;pointer-events:none}.switch::after{content:'';position:absolute;width:20px;height:20px;top:3px;left:3px;border-radius:50%;background:#fff;transition:transform .15s}.setting-row input:checked+.switch{background:var(--green)}.setting-row input:checked+.switch::after{transform:translateX(18px)}.setting-row input:focus-visible+.switch{outline:3px solid #80bca1;outline-offset:4px}.setting-row input:disabled+.switch{opacity:.4}.test-sound{display:flex;align-items:center;gap:9px;width:100%;min-height:58px;border:0;background:none;color:var(--green);font-size:18px;padding:15px 0;margin-bottom:10px}.test-sound>span{margin-left:auto;display:flex;align-items:center;gap:6px}.test-sound>span svg{width:18px}.usage-note{display:flex;gap:8px;margin:26px 0 0;color:#76877b;font-size:15px;line-height:1.8}.usage-note p{margin:0}.note-icon{display:none}.keyboard-hint{display:none}.site-footer{display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:28px;border-top:1px solid var(--line);padding:20px 0 4px;font-size:16px;line-height:1.7;color:#65766c;text-align:center}.timer-card.warning .time{color:#b37219}.timer-card.warning .timer-notice,.timer-card.warning .phase-label{color:#9a641a}.timer-card[data-phase="feedback"] .time,.timer-card[data-phase="feedback"] .phase-label,.timer-card[data-phase="feedback"] .timer-notice{color:#c03a42}.timer-card[data-phase="feedback"] .status-pill{color:#b8363e}.timer-card[data-phase="feedback"] .status-pill>span:first-child{background:#c03a42}.timer-card[data-phase="feedback"] .timer-notice{font-weight:600}.visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,8px);background:#f2f8f4;color:#234b35;border:1px solid #d3e3d8;padding:14px 18px;border-radius:9px;max-width:calc(100vw - 32px);width:max-content;font-size:18px;text-align:center;line-height:1.6;opacity:0;pointer-events:none;transition:opacity .15s,transform .15s;z-index:20}.toast.visible{opacity:1;transform:translate(-50%,0)}dialog{border:1px solid #dbe5dd;border-radius:14px;padding:26px;width:calc(100% - 32px);max-width:420px;color:#2a4031}dialog::backdrop{background:#173a2a44}.dialog-icon{display:none}dialog h2{font-size:24px;margin:0 0 12px;font-weight:600}dialog p{font-size:18px;line-height:1.7;color:var(--muted);margin:0 0 24px}.dialog-actions{display:flex;gap:12px}.dialog-actions button{flex:1;min-height:54px;border:0;border-radius:8px;font-size:19px}.dialog-cancel{background:#f1f5f1;color:#48614e}.dialog-confirm{background:var(--green);color:#fff}.page-shell:fullscreen{max-width:none;padding:0 max(24px,calc((100vw - 660px)/2)) 30px;background:#fff;overflow:auto}.page-shell:fullscreen .time{font-size:clamp(110px,20vh,200px)}
+@media(max-width:480px){.page-shell{padding:0 22px 24px}.site-header{height:64px}.brand{font-size:17px}.brand-separator{margin:0 6px}.quiet-button{font-size:16px}.page-intro{margin:12px 0 24px}h1{font-size:23px}.station-context{margin-top:23px}.station-context strong{font-size:26px}.dial{margin-top:20px}.time{font-size:clamp(88px,25.6vw,122px);letter-spacing:-4px}.timer-notice{font-size:17px;margin:16px 0 22px;min-height:28px}.timer-footer>span{display:grid;gap:5px}.timer-footer>span:last-child{text-align:right}.workspace{gap:8px}.phase-label{font-size:21px}.station-context>span{font-size:19px}.timer-controls .primary-button{font-size:21px}}
+@media(max-width:350px){.page-shell{padding-left:16px;padding-right:16px}.brand-sub,.brand-separator{display:none}.timer-top-caption,.status-pill{font-size:15px}.station-context strong{font-size:24px}.timer-controls{gap:9px}.reset-button{width:58px}.dial-message{font-size:16px}.timer-notice{font-size:16px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
+</style>
+  <style>/* 兒童醫院主題：CSS 變數、漸層、偽元素與純 CSS 小熊，無外部素材。 */
+.pediatric-theme {
+  --sky: #eaf5fd;
+  --sky-deep: #326e9c;
+  --mint: #eaf7ef;
+  --mint-deep: #387759;
+  --peach: #fff1e7;
+  --honey: #f5cf7c;
+  --ink: #2a455d;
+  --muted: #62798b;
+  --line: #e4edf1;
+  --green: #34749f;
+  color: var(--ink);
+  background:
+    radial-gradient(ellipse at 5% 5%, #e8f5ff 0, transparent 42%),
+    radial-gradient(ellipse at 100% 50%, #edf8ef 0, transparent 38%),
+    linear-gradient(155deg, #fffefb, #f8fcff 60%, #fffaf5);
+  background-attachment: fixed;
+}
+
+.pediatric-theme .page-shell { max-width: 730px; padding-top: 8px; }
+.pediatric-theme .site-header { height: 70px; }
+.pediatric-theme .brand { color: #486c87; font-weight: 650; }
+.pediatric-theme .brand-symbol {
+  width: 39px; height: 39px; border-radius: 14px;
+  color: #367997; background: #e3f1f9; border: 1px solid #d4e7f3;
+  transform: rotate(-7deg);
+}
+.pediatric-theme .brand-symbol svg { transform: rotate(7deg); }
+.pediatric-theme .brand-sub { color: #658378; font-size: 17px; }
+.pediatric-theme .quiet-button {
+  border-radius: 16px; padding: 9px 12px; background: #ffffffb3;
+  color: #5b778a; border: 1px solid #e1edf3;
+}
+.pediatric-theme .quiet-button:hover { background: #eaf5fd; }
+.pediatric-theme .page-intro {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; margin: 22px 0 27px; min-height: 116px;
+}
+.pediatric-theme .page-intro > div:first-child { position: relative; z-index: 1; }
+.pediatric-theme .eyebrow {
+  display: inline-block; margin: 0 0 10px; padding: 5px 11px;
+  background: #e5f4ec; border-radius: 9px; color: #507d67;
+  font-size: 15px; font-weight: 500; letter-spacing: 1px;
+}
+.pediatric-theme h1 { font-size: 29px; font-weight: 650; letter-spacing: .4px; color: #2b4e69; }
+.pediatric-theme .intro-copy { display: block; font-size: 17px; color: #72899a; margin: 9px 0 0; }
+
+/* 柔和、靜態的小熊與雲朵，裝飾不介入操作或倒數。 */
+.care-illustration { position: relative; width: 130px; height: 122px; flex: 0 0 130px; }
+.soft-cloud {
+  position: absolute; right: -4px; bottom: 4px; width: 126px; height: 36px;
+  border-radius: 50px; background: #fff; box-shadow: 0 5px 12px #537e9d09;
+}
+.soft-cloud::before, .soft-cloud::after { content: ''; position: absolute; background: #fff; border-radius: 50%; }
+.soft-cloud::before { width: 51px; height: 51px; top: -22px; left: 23px; }
+.soft-cloud::after { width: 38px; height: 38px; top: -15px; right: 17px; }
+.care-bear { position: absolute; width: 88px; height: 87px; top: 14px; left: 20px; transform: rotate(5deg); }
+.bear-ear { position: absolute; top: 8px; width: 29px; height: 29px; border-radius: 50%; background: #f2d2ad; border: 6px solid #f8dfc3; }
+.ear-left { left: -2px; } .ear-right { right: -2px; }
+.bear-face { position: absolute; inset: 20px 4px 0; border-radius: 43% 43% 46% 46%; background: linear-gradient(135deg, #ffe9cf, #f3d5b3); box-shadow: inset 0 -3px 0 #eac6a444; }
+.bear-eyes { position: absolute; left: 24px; top: 24px; width: 5px; height: 6px; border-radius: 50%; background: #715c54; box-shadow: 28px 0 #715c54; }
+.bear-cheeks { position: absolute; left: 12px; top: 34px; width: 13px; height: 7px; border-radius: 50%; background: #efb9ac88; box-shadow: 43px 0 #efb9ac88; }
+.bear-muzzle { position: absolute; left: 27px; top: 33px; width: 27px; height: 21px; border-radius: 50%; background: #fff4e4; }
+.bear-muzzle::before { content: ''; position: absolute; width: 7px; height: 5px; border-radius: 50% 50% 45% 45%; background: #9c7865; left: 10px; top: 4px; }
+.bear-muzzle i { position: absolute; width: 9px; height: 6px; border-bottom: 1.5px solid #a88776; border-radius: 50%; left: 9px; top: 9px; }
+.bear-cap { position: absolute; top: 3px; left: 19px; width: 51px; height: 30px; border-radius: 14px 14px 5px 5px; background: linear-gradient(#fff, #f4fcff); border: 1px solid #dfeef2; transform: rotate(-6deg); }
+.bear-cap::before, .bear-cap::after { content: ''; position: absolute; background: #72b6a4; border-radius: 2px; left: 21px; top: 7px; width: 7px; height: 16px; }
+.bear-cap::after { width: 16px; height: 7px; left: 17px; top: 11px; }
+.little-star { position: absolute; width: 15px; height: 15px; background: #efce7c; clip-path: polygon(50% 0, 64% 35%, 100% 50%, 64% 64%, 50% 100%, 35% 64%, 0 50%, 35% 35%); }
+.star-one { left: 3px; top: 19px; transform: rotate(13deg); }
+.star-two { right: 0; top: 42px; width: 12px; height: 12px; background: #9bc8d9; }
+
+.pediatric-theme .workspace { gap: 19px; }
+.pediatric-theme .timer-card {
+  position: relative; padding: 24px 26px 0; border-radius: 29px;
+  border: 1px solid #dfeaf1; background: #fff;
+  box-shadow: 0 12px 35px #507b9510, 0 2px 3px #507b9505;
+}
+.pediatric-theme .timer-card::before {
+  content: ''; position: absolute; top: -1px; left: 30px; right: 30px; height: 5px;
+  border-radius: 0 0 10px 10px; background: linear-gradient(90deg, #b5ddeb, #b5dfca 48%, #f3d5b9);
+}
+.pediatric-theme .status-pill { padding: 5px 10px; border-radius: 10px; background: #f0f6f9; color: #617b90; font-size: 16px; }
+.pediatric-theme .status-pill.running { color: #387759; background: #eaf7ef; }
+.pediatric-theme .status-pill.running > span:first-child { background: #5aa385; }
+.pediatric-theme .status-pill.paused { background: #fff6e7; color: #986c24; }
+.pediatric-theme .timer-top-caption { font-size: 16px; color: #72879a; }
+.pediatric-theme .station-context { margin-top: 25px; gap: 8px; }
+.pediatric-theme .station-context strong { color: #365b75; font-size: 28px; font-weight: 550; }
+.pediatric-theme .station-context > span { color: #748b9c; font-size: 19px; }
+.pediatric-theme .dial { margin-top: 24px; }
+.pediatric-theme .phase-label { background: #edf5fd; border-radius: 11px; padding: 5px 15px; font-size: 19px; color: #4f7da0; margin-bottom: 3px; }
+.pediatric-theme .time { color: #2d5876; font-weight: 600; letter-spacing: -4px; }
+.pediatric-theme .dial-message { color: #70879a; font-size: 16px; }
+.pediatric-theme .timer-notice { color: #667d8b; margin: 17px 0 22px; font-size: 17px; }
+.pediatric-theme .primary-button {
+  background: linear-gradient(120deg, #3f83af, #39769f); border-radius: 18px;
+  border-bottom: 4px solid #2b658d; min-height: 65px; font-size: 21px;
+  box-shadow: 0 5px 10px #528eaf12; transition: transform .15s, box-shadow .15s;
+}
+.pediatric-theme .primary-button:hover { background: linear-gradient(120deg, #397ba6, #326b92); transform: translateY(-1px); box-shadow: 0 7px 14px #528eaf22; }
+.pediatric-theme .primary-button:active { transform: translateY(2px); border-bottom-width: 2px; }
+.pediatric-theme .reset-button { border-radius: 18px; border-color: #dfeaf1; color: #7794a5; background: #f8fbfe; }
+.pediatric-theme .reset-button:hover:not(:disabled) { background: #ecf5fc; }
+.pediatric-theme .timer-footer { margin-top: 17px; padding: 17px 0 21px; border-top: 1px dashed #dce8ef; border-bottom: 0; color: #7b8d9a; font-size: 16px; }
+.pediatric-theme .timer-footer strong { color: #3f6076; font-size: 19px; }
+.pediatric-theme .side-panel { gap: 10px; }
+.pediatric-theme .side-panel > details { background: #ffffffcf; border: 1px solid #e1ebf0; border-radius: 18px; padding: 0 19px; }
+.pediatric-theme .side-panel summary { justify-content: flex-start; color: #577388; min-height: 63px; font-size: 18px; }
+.pediatric-theme .side-panel summary::after { margin-left: auto; color: #93acba; font-size: 24px; }
+.pediatric-theme .side-panel summary::before { content: '✦'; display: grid; place-items: center; width: 30px; height: 30px; flex: 0 0 30px; margin-right: 12px; background: #fff0e4; color: #bf9478; font-size: 18px; border-radius: 10px; }
+.pediatric-theme .side-panel .flow-card summary::before { content: '◷'; background: #eaf6ef; color: #6b9e87; font-size: 22px; }
+.pediatric-theme .side-panel .settings-card summary::before { content: '♪'; background: #edf2fd; color: #899fc5; font-size: 21px; }
+.pediatric-theme .identity-fields input { border-color: #dce9f0; border-radius: 12px; background: #fbfdff; color: #34546a; }
+.pediatric-theme .identity-fields label, .pediatric-theme .setting-copy > span { color: #536f84; }
+.pediatric-theme .switch { background: #e0eaf0; }
+.pediatric-theme .setting-row input:checked + .switch { background: #6ba990; }
+.pediatric-theme .test-sound { color: #4381a6; }
+.pediatric-theme .reading-separate { border-top-style: dashed; }
+.pediatric-theme .reading-separate.active > strong { color: #478a75; }
+.pediatric-theme .usage-note { padding: 0 8px; color: #7c8f9d; }
+.pediatric-theme .site-footer { color: #7a8b99; border-top: 0; padding-top: 10px; gap: 4px; }
+.pediatric-theme .site-footer::before { content: '✦'; font-size: 18px; color: #d9bf89; margin-bottom: 6px; }
+.pediatric-theme .toast { background: #f0f8ff; border-color: #cfe2f0; color: #3f6c8a; border-radius: 16px; }
+.pediatric-theme dialog { border-radius: 24px; border-color: #d7e7f0; color: #34566e; box-shadow: 0 18px 80px #45677e22; }
+.pediatric-theme .dialog-cancel { background: #eef5f9; color: #617e94; border-radius: 13px; }
+.pediatric-theme .dialog-confirm { background: #3b7ca6; border-radius: 13px; }
+.pediatric-theme .timer-card.warning { border-color: #edce93; }
+.pediatric-theme .timer-card.warning::before { background: #efd398; }
+.pediatric-theme .timer-card.warning .time { color: #a56c1e; }
+.pediatric-theme .timer-card.warning .phase-label { background: #fff5df; color: #9a6e2b; }
+.pediatric-theme .timer-card[data-phase='feedback'] { border-color: #e8b6bb; background: #fffdfd; }
+.pediatric-theme .timer-card[data-phase='feedback']::before { background: #e9b0b8; }
+.pediatric-theme .timer-card[data-phase='feedback'] .time,
+.pediatric-theme .timer-card[data-phase='feedback'] .timer-notice { color: #b8424e; }
+.pediatric-theme .timer-card[data-phase='feedback'] .phase-label { background: #fff0f1; color: #b24b55; }
+.pediatric-theme .timer-card[data-phase='feedback'] .status-pill { background: #fff0f1; color: #b24b55; }
+.pediatric-theme .page-shell:fullscreen { background: #f6fbfe; }
+
+@media (max-width: 480px) {
+  .pediatric-theme .page-shell { padding: 0 16px 24px; }
+  .pediatric-theme .site-header { height: 65px; }
+  .pediatric-theme .brand { font-size: 17px; gap: 8px; }
+  .pediatric-theme .brand-symbol { width: 32px; height: 35px; border-radius: 12px; }
+  .pediatric-theme .brand-sub { font-size: 16px; }
+  .pediatric-theme .quiet-button { padding: 8px 9px; font-size: 15px; }
+  .pediatric-theme .quiet-button svg { width: 16px; }
+  .pediatric-theme .page-intro { gap: 4px; margin: 13px 0 20px; min-height: 109px; }
+  .pediatric-theme h1 { font-size: 23px; letter-spacing: -.3px; }
+  .pediatric-theme .eyebrow { font-size: 14px; margin-bottom: 8px; padding: 4px 8px; letter-spacing: .5px; }
+  .pediatric-theme .intro-copy { font-size: 16px; margin-top: 7px; }
+  .care-illustration { width: 91px; height: 108px; flex-basis: 91px; transform: scale(.87); transform-origin: right center; }
+  .care-bear { left: 2px; }
+  .soft-cloud { width: 100px; right: -8px; }
+  .star-one { left: -7px; top: 10px; }
+  .star-two { right: -4px; top: 31px; }
+  .pediatric-theme .timer-card { border-radius: 25px; padding: 19px 18px 0; }
+  .pediatric-theme .timer-top { gap: 8px; }
+  .pediatric-theme .status-pill { font-size: 15px; padding: 5px 8px; }
+  .pediatric-theme .timer-top-caption { font-size: 15px; }
+  .pediatric-theme .station-context { margin-top: 21px; }
+  .pediatric-theme .station-context strong { font-size: 26px; }
+  .pediatric-theme .dial { margin-top: 20px; }
+  .pediatric-theme .time { font-size: clamp(88px, 25.7vw, 119px); }
+  .pediatric-theme .phase-label { font-size: 19px; }
+  .pediatric-theme .timer-notice { font-size: 16px; line-height: 1.7; margin: 14px 0 19px; }
+  .pediatric-theme .primary-button { min-height: 62px; font-size: 21px; }
+  .pediatric-theme .reset-button { min-height: 62px; width: 59px; }
+  .pediatric-theme .timer-controls { gap: 10px; }
+  .pediatric-theme .side-panel > details { padding: 0 14px; }
+  .pediatric-theme .side-panel summary { font-size: 17px; }
+  .pediatric-theme .side-panel summary::before { width: 27px; height: 27px; flex-basis: 27px; margin-right: 10px; }
+}
+@media (max-width: 350px) {
+  .pediatric-theme .page-shell { padding-left: 12px; padding-right: 12px; }
+  .pediatric-theme .timer-card { padding-left: 14px; padding-right: 14px; }
+  .pediatric-theme h1 { font-size: 21px; }
+  .care-illustration { width: 76px; flex-basis: 76px; transform: scale(.75); }
+  .pediatric-theme .timer-top-caption { font-size: 14px; }
+  .pediatric-theme .side-panel summary { font-size: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pediatric-theme *, .pediatric-theme *::before, .pediatric-theme *::after { animation: none !important; transition: none !important; }
+}
+@media print {
+  .pediatric-theme { background: #fff; }
+  .care-illustration, .quiet-button, .timer-controls { display: none; }
+  .pediatric-theme .timer-card { box-shadow: none; }
+}
+</style>
+</head>
+<body class="pediatric-theme">
+  <svg class="svg-defs" aria-hidden="true"><defs>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.5M9 2h6M12 2v3M18.5 6.5l1.5-1.5"/></symbol>
+    <symbol id="i-expand" viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></symbol>
+    <symbol id="i-reset" viewBox="0 0 24 24"><path d="M3 10a9 9 0 1 1 1 7M3 4v6h6"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="m9 5 11 7-11 7z" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14" stroke-width="4"/></symbol>
+    <symbol id="i-volume" viewBox="0 0 24 24"><path d="m11 4-6 5H2v6h3l6 5zM16 8a6 6 0 0 1 0 8M19 5a10 10 0 0 1 0 14"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-5-5 5 5-5 5"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1 1m12 12 1 1M5 19l1-1M18 6l1-1"/></symbol>
+  </defs></svg>
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="#" aria-label="OSCE 計時器首頁"><span class="brand-symbol"><svg><use href="#i-clock"/></svg></span><span>OSCE<span class="brand-separator">/</span><span class="brand-sub">兒童照護</span></span></a>
+      <button id="fullscreen" class="quiet-button" title="切換全螢幕"><svg><use href="#i-expand"/></svg><span>全螢幕</span></button>
+    </header>
+    <main>
+      <div class="page-intro"><div><p class="eyebrow">兒童醫院・臨床教學</p><h1>OSCE 考官計時器</h1><p class="intro-copy" id="intro-copy">溫柔照護，專注每一站。</p></div><div class="care-illustration" aria-hidden="true"><span class="little-star star-one"></span><span class="little-star star-two"></span><span class="soft-cloud"></span><div class="care-bear"><i class="bear-ear ear-left"></i><i class="bear-ear ear-right"></i><div class="bear-face"><span class="bear-eyes"></span><span class="bear-cheeks"></span><span class="bear-muzzle"><i></i></span></div><span class="bear-cap"><i></i></span></div></div></div>
+      <div class="workspace">
+        <section class="timer-card" aria-label="考試倒數計時器">
+          <div class="timer-top"><span class="status-pill" id="status"><span></span><span id="status-text">準備就緒</span></span><span class="timer-top-caption" id="timer-caption">第 3 站・第 1 輪</span></div>
+          <div class="station-context"><strong id="station-topic">腹部身體檢查</strong><span id="student-caption">學員 A</span></div>
+          <div class="dial" id="dial">
+            <svg class="dial-ring" viewBox="0 0 320 320" aria-hidden="true"><circle class="dial-track" cx="160" cy="160" r="145"/><circle id="dial-progress" class="dial-progress" cx="160" cy="160" r="145" pathLength="100"/><circle class="dial-marker" cx="22.1" cy="115.2" r="4"/></svg>
+            <div class="dial-content"><span class="phase-label" id="phase-label">讀題時間</span><div class="time" id="time" role="timer" aria-label="剩餘 1 分鐘">01:00</div><div class="dial-message" id="dial-message"><span class="tiny-dot"></span>準備好後，開始計時</div></div>
+          </div>
+          <div class="timer-notice" id="timer-notice">時間交給這裡，專心完成每一步。</div>
+          <div class="timer-controls"><button class="primary-button" id="start"><svg><use id="start-icon" href="#i-play"/></svg><span id="start-label">開始本站讀題</span></button><button class="reset-button" id="reset" aria-label="重設計時器" title="重設計時器"><svg><use href="#i-reset"/></svg></button></div>
+          <div class="timer-footer"><span>考試已過 <strong id="elapsed">00:00</strong></span><span id="total-line">考試剩餘 <strong>10:00</strong></span></div>
+        </section>
+        <aside class="side-panel">
+          <details class="identity-card"><summary>考站與學員設定</summary><div class="identity-fields"><label>考站編號<input id="station-number" type="number" inputmode="numeric" min="1" max="999" value="3"></label><label>考站名稱<input id="station-name" type="text" maxlength="40" value="腹部身體檢查"></label><label>學員<input id="student-name" type="text" maxlength="40" value="學員 A"></label></div></details>
+          <details class="flow-card">
+            <summary id="flow-title">時間安排：8＋2 分鐘</summary>
+            <div class="timeline" id="timeline"></div>
+            <div class="total-row"><span>本站考試時間</span><strong>10 <small>分鐘</small></strong></div>
+            <div id="reading-separate" class="reading-separate"><div><b>轉場＋讀下一題</b><small>另計，不包含在考試 10 分鐘內</small></div><strong>01:00</strong></div>
+            <p class="field-hint">首站先讀題 1 分鐘。回饋結束後，自動換站並讀下一題，共 1 分鐘，再開始下一站作答。</p>
+          </details>
+          <details class="settings-card"><summary id="settings-title">提示音與螢幕設定</summary>
+            <label class="setting-row"><span class="setting-copy"><span>提示音</span><small>時間提醒與結束響鈴</small></span><input type="checkbox" id="sound" role="switch" checked><span class="switch" aria-hidden="true"></span></label>
+            <label class="setting-row"><span class="setting-copy"><span>語音提醒</span><small>播報階段切換與「剩下 1 分鐘」</small></span><input type="checkbox" id="voice" role="switch"><span class="switch" aria-hidden="true"></span></label>
+            <label class="setting-row"><span class="setting-copy"><span>保持螢幕常亮</span><small id="wake-description">計時時盡量避免螢幕休眠</small></span><input type="checkbox" id="awake" role="switch" checked><span class="switch" aria-hidden="true"></span></label>
+            <button id="test-sound" class="test-sound"><svg><use href="#i-volume"/></svg>測試提醒<span>試聽<svg><use href="#i-arrow"/></svg></span></button>
+          </details>
+        </aside>
+      </div>
+      <div class="usage-note"><span class="note-icon"><svg><use href="#i-sun"/></svg></span><p>手機使用時，請保持頁面開啟並確認音量。鎖定螢幕或切到背景時，提示音可能受系統限制。</p><span class="keyboard-hint"><kbd>空白鍵</kbd> 開始 / 暫停</span></div>
+    </main>
+    <footer class="site-footer"><span>第 5 版・兒童醫院風格</span><span>© 2026 林湘瑜。版權所有。</span></footer>
+  </div>
+  <dialog id="reset-dialog"><form method="dialog"><div class="dialog-icon"><svg><use href="#i-reset"/></svg></div><h2>重設全部計時？</h2><p>輪次與進度將歸零，回到第 1 輪讀題。考站與學員設定會保留。</p><div class="dialog-actions"><button value="cancel" class="dialog-cancel" autofocus>取消</button><button value="reset" class="dialog-confirm">重設計時</button></div></form></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <div id="announcement" class="visually-hidden" aria-live="assertive" aria-atomic="true"></div>
+  <script>/** All durations and timestamps are in milliseconds. */
+const FLOWS = Object.freeze([
+  { id: 'examiner', name: '考官循環計時', repeat: true, phases: [
+    { id: 'reading', label: '換站・讀題', durationMs: 60000 },
+    { id: 'exam', label: '作答時間', durationMs: 480000 },
+    { id: 'feedback', label: '回饋時間', durationMs: 120000 }
+  ] },
+  { id: 'exam-transition', name: '作答 8 分鐘＋轉場 2 分鐘', phases: [
+    { id: 'exam', label: '作答時間', durationMs: 480000 },
+    { id: 'transition', label: '轉場時間', durationMs: 120000 }
+  ] },
+  { id: 'reading-exam', name: '讀題 2 分鐘＋作答 8 分鐘', phases: [
+    { id: 'reading', label: '讀題時間', durationMs: 120000 },
+    { id: 'exam', label: '作答時間', durationMs: 480000 }
+  ] },
+  { id: 'continuous', name: '考試 10 分鐘・第 8 分鐘提醒', phases: [
+    { id: 'exam', label: '作答時間', durationMs: 600000 }
+  ] }
+].map(flow => Object.freeze({ ...flow, phases: Object.freeze(flow.phases.map(Object.freeze)) })));
+
+const STATES = ['idle', 'running', 'paused', 'finished'];
+const clock = now => {
+  if (!Number.isFinite(now)) throw new TypeError('Timestamp must be finite');
+  return now;
+};
+
+class ExamTimer {
+  constructor(flowId = 'exam-transition') {
+    this.flow = this._findFlow(flowId);
+    this.reset();
+  }
+
+  _findFlow(id) {
+    const flow = FLOWS.find(item => item.id === id);
+    if (!flow) throw new RangeError('Unknown timer flow');
+    return flow;
+  }
+
+  start(now = Date.now()) {
+    clock(now);
+    if (this.status === 'idle' || this.status === 'paused') {
+      this._startedAt = now;
+      this.status = 'running';
+    }
+    return this.snapshot(now);
+  }
+
+  pause(now = Date.now()) {
+    const state = this.snapshot(now);
+    if (this.status === 'running') {
+      this._elapsedMs = state.absoluteElapsedMs;
+      this._startedAt = null;
+      this.status = 'paused';
+    }
+    return this.snapshot(now);
+  }
+
+  reset() {
+    this._elapsedMs = 0;
+    this._startedAt = null;
+    this.status = 'idle';
+    return this;
+  }
+
+  setFlow(id) {
+    if (this.status === 'running' || this.status === 'paused') {
+      throw new Error('Reset the timer before changing its flow');
+    }
+    this.flow = this._findFlow(id);
+    return this.reset();
+  }
+
+  snapshot(now = Date.now()) {
+    clock(now);
+    const totalMs = this.flow.phases.reduce((sum, phase) => sum + phase.durationMs, 0);
+    const rawElapsedMs = Math.max(0, this._elapsedMs +
+      (this.status === 'running' ? Math.max(0, now - this._startedAt) : 0));
+    const absoluteElapsedMs = this.flow.repeat ? rawElapsedMs : Math.min(totalMs, rawElapsedMs);
+    const cycleIndex = this.flow.repeat ? Math.floor(absoluteElapsedMs / totalMs) : 0;
+    const elapsedMs = this.flow.repeat ? absoluteElapsedMs % totalMs : absoluteElapsedMs;
+    if (!this.flow.repeat && elapsedMs >= totalMs && this.status !== 'idle') {
+      this.status = 'finished';
+      this._elapsedMs = totalMs;
+      this._startedAt = null;
+    }
+    let phaseIndex = 0;
+    let phaseStart = 0;
+    while (phaseIndex < this.flow.phases.length - 1 &&
+      elapsedMs >= phaseStart + this.flow.phases[phaseIndex].durationMs) {
+      phaseStart += this.flow.phases[phaseIndex].durationMs;
+      phaseIndex += 1;
+    }
+    const phase = this.flow.phases[phaseIndex];
+    return {
+      status: this.status,
+      absoluteElapsedMs,
+      cycleIndex,
+      stationNumber: cycleIndex + 1,
+      elapsedMs,
+      totalRemainingMs: Math.max(0, totalMs - elapsedMs),
+      examElapsedMs: this.flow.id === 'examiner' ? Math.max(0, elapsedMs - 60000) : elapsedMs,
+      examRemainingMs: this.flow.id === 'examiner' ? Math.min(600000, Math.max(0, totalMs - elapsedMs)) : Math.max(0, totalMs - elapsedMs),
+      phaseRemainingMs: Math.max(0, phase.durationMs - (elapsedMs - phaseStart)),
+      phaseIndex,
+      phaseId: phase.id,
+      phaseLabel: phase.label,
+      totalMs,
+      phaseDurationMs: phase.durationMs,
+      progress: elapsedMs / totalMs
+    };
+  }
+
+  serialize(now = Date.now()) {
+    const state = this.snapshot(now);
+    return { version: 1, flowId: this.flow.id, status: state.status,
+      elapsedMs: state.absoluteElapsedMs, savedAt: now };
+  }
+
+  /** Restore validated local data; background time counts only for a running timer. */
+  restore(data, now = Date.now()) {
+    clock(now);
+    if (!data || data.version !== 1 || !STATES.includes(data.status) ||
+      !Number.isFinite(data.elapsedMs) || data.elapsedMs < 0 ||
+      !Number.isFinite(data.savedAt) || !FLOWS.some(flow => flow.id === data.flowId)) {
+      return false;
+    }
+    this.flow = this._findFlow(data.flowId);
+    const totalMs = this.flow.phases.reduce((sum, phase) => sum + phase.durationMs, 0);
+    const restoredElapsed = data.elapsedMs + (data.status === 'running' ? Math.max(0, now - data.savedAt) : 0);
+    this._elapsedMs = data.status === 'idle' ? 0 : this.flow.repeat ? restoredElapsed : Math.min(totalMs, restoredElapsed);
+    this.status = data.status;
+    if (data.status === 'finished') this._elapsedMs = totalMs;
+    this._startedAt = data.status === 'running' ? now : null;
+    this.snapshot(now);
+    return true;
+  }
+}
+
+const STATION_MS = 660000;
+/** Return only the most recent crossed cue, so returning from the background never plays stale cues in a burst. */
+function latestAlert(from, to) {
+  if (to <= from) return null;
+  const cycle = Math.floor(to / STATION_MS);
+  let latest = null;
+  for (let c = Math.max(0, cycle - 1); c <= cycle; c++) {
+    const offset = c * STATION_MS;
+    const points = [
+      {at: offset, text: `第 ${c + 1} 輪，請換站並閱讀下一題，時間 1 分鐘。`, kind: 'notice'},
+      {at: offset + 60000, text: '讀題結束，請開始作答，時間 8 分鐘。', kind: 'notice'},
+      {at: offset + 480000, text: '作答已經過 7 分鐘，剩下 1 分鐘。', kind: 'notice'},
+      {at: offset + 540000, text: '作答時間到，請停止作答，開始回饋，時間 2 分鐘。', kind: 'end'}
+    ];
+    for (const point of points) if (point.at > from && point.at <= to) latest = point;
+  }
+  return latest;
+}
+
+
+
+const $ = id => document.getElementById(id);
+const timer = new ExamTimer('examiner');
+const KEY = 'osce-examiner-v2';
+let audioContext, wakeLock, toastTimeout, savedAt = 0, lastShown = '', lastAnnounced = '', previous;
+const options = { sound: true, voice: false, awake: true };
+const safeStore = { read() { try { return JSON.parse(localStorage.getItem(KEY)); } catch { return null; } }, write(value) { try { localStorage.setItem(KEY, JSON.stringify(value)); } catch { /* Private browsing may disable storage. */ } } };
+const saved = safeStore.read();
+const identity = { stationNumber: 3, stationName: '腹部身體檢查', studentName: '學員 A' };
+if (saved?.identity) {
+  if (Number.isInteger(saved.identity.stationNumber) && saved.identity.stationNumber >= 1 && saved.identity.stationNumber <= 999) identity.stationNumber = saved.identity.stationNumber;
+  for (const key of ['stationName','studentName']) if (typeof saved.identity[key] === 'string') identity[key] = saved.identity[key].slice(0,40);
+}
+$('station-number').value = identity.stationNumber;
+$('station-name').value = identity.stationName;
+$('student-name').value = identity.studentName;
+if (saved?.timer) timer.restore(saved.timer);
+for (const key of Object.keys(options)) {
+  if (typeof saved?.options?.[key] === 'boolean') options[key] = saved.options[key];
+  $(key).checked = options[key];
+}
+
+
+function format(ms) {
+  const secs = Math.ceil(Math.max(0, ms) / 1000);
+  return `${String(Math.floor(secs / 60)).padStart(2, '0')}:${String(secs % 60).padStart(2, '0')}`;
+}
+function persist() { safeStore.write({ timer: timer.serialize(), options, identity }); }
+function toast(text) {
+  $('toast').textContent = text;
+  $('toast').classList.add('visible');
+  clearTimeout(toastTimeout);
+  toastTimeout = setTimeout(() => $('toast').classList.remove('visible'), 3800);
+}
+function announce(text) { $('announcement').textContent = text; }
+async function unlockAudio() {
+  if (!options.sound) return;
+  try {
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContext) return;
+    audioContext ||= new AudioContext();
+    if (audioContext.state === 'suspended') await audioContext.resume();
+  } catch { toast('此瀏覽器無法播放提示音，請留意畫面提醒。'); }
+}
+function beep(kind = 'notice') {
+  if (!options.sound || !audioContext || audioContext.state !== 'running') return;
+  const count = kind === 'end' ? 3 : 2;
+  const now = audioContext.currentTime;
+  for (let i = 0; i < count; i++) {
+    const osc = audioContext.createOscillator();
+    const gain = audioContext.createGain();
+    const at = now + i * .38;
+    osc.type = 'sine';
+    osc.frequency.value = kind === 'end' ? 660 : 880;
+    gain.gain.setValueAtTime(0, at);
+    gain.gain.linearRampToValueAtTime(.3, at + .02);
+    gain.gain.exponentialRampToValueAtTime(.001, at + .27);
+    osc.connect(gain); gain.connect(audioContext.destination);
+    osc.start(at); osc.stop(at + .29);
+  }
+}
+function say(text) {
+  if (!options.voice || !('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = 'zh-TW'; utterance.rate = .92;
+  const voices = speechSynthesis.getVoices();
+  const voice = voices.find(v => v.lang === 'zh-TW') || voices.find(v => /^zh/.test(v.lang));
+  if (voice) utterance.voice = voice;
+  speechSynthesis.speak(utterance);
+}
+function alertUser(text, kind = 'notice') {
+  beep(kind); say(text); announce(text); toast(text);
+  if (typeof navigator.vibrate === 'function') navigator.vibrate(kind === 'end' ? [200, 100, 200, 100, 400] : [160, 80, 160]);
+}
+async function releaseWake() {
+  const lock = wakeLock; wakeLock = null;
+  if (lock) try { await lock.release(); } catch { /* Released by browser. */ }
+}
+async function requestWake() {
+  if (!options.awake || timer.status !== 'running' || document.hidden || !('wakeLock' in navigator) || wakeLock) return;
+  try {
+    const lock = await navigator.wakeLock.request('screen');
+    if (!options.awake || timer.status !== 'running' || document.hidden) { await lock.release(); return; }
+    wakeLock = lock;
+    lock.addEventListener('release', () => { if (wakeLock === lock) wakeLock = null; });
+    $('wake-description').textContent = '計時中已保持螢幕常亮';
+  } catch { $('wake-description').textContent = '系統未允許常亮，請保持頁面開啟'; }
+}
+if (!('wakeLock' in navigator)) {
+  options.awake = false; $('awake').checked = false; $('awake').disabled = true;
+  $('wake-description').textContent = '此瀏覽器不支援，請調整自動鎖定設定';
+}
+if (!('speechSynthesis' in window)) {
+  options.voice = false; $('voice').checked = false; $('voice').disabled = true;
+  $('voice').closest('label').querySelector('small').textContent = '此瀏覽器不支援語音播報';
+}
+
+
+function buildTimeline() {
+  $('timeline').replaceChildren(...timer.flow.phases.slice(1).map((phase, i) => {
+    const item = document.createElement('div'); item.className = 'timeline-step';
+    const number = document.createElement('span'); number.className = 'step-number'; number.textContent = String(i + 1).padStart(2, '0');
+    const copy = document.createElement('div'); copy.className = 'step-copy';
+    const label = document.createElement('b'); label.textContent = phase.label;
+    const note = document.createElement('small'); note.textContent = ['獨立 8 分鐘倒數；剩 1 分鐘時提醒', '作答結束後，接續 2 分鐘回饋'][i];
+    const duration = document.createElement('span'); duration.className = 'step-time'; duration.textContent = format(phase.durationMs);
+    copy.append(label, note); item.append(number, copy, duration); return item;
+  }));
+}
+function render(now = Date.now(), allowAlerts = true) {
+  const s = timer.snapshot(now);
+  const active = s.status === 'running' || s.status === 'paused';
+  const warning = active && s.phaseId === 'exam' && s.phaseRemainingMs <= 60000;
+  const shown = format(s.phaseRemainingMs);
+  if (shown !== lastShown) {
+    $('time').textContent = shown;
+    $('time').setAttribute('aria-label', `${s.phaseLabel}剩餘 ${shown}`);
+    lastShown = shown;
+  }
+  $('status-text').textContent = s.status === 'running' && s.phaseId === 'feedback' ? '作答時間到' : {idle:'準備就緒',running:'計時中',paused:'已暫停'}[s.status];
+  $('status').className = `status-pill ${s.status}`;
+  const card = document.querySelector('.timer-card');
+  card.classList.toggle('warning', warning);
+  card.dataset.phase = s.phaseId;
+  $('phase-label').textContent = s.phaseId === 'reading' && s.stationNumber === 1 ? '讀題時間' : s.phaseLabel;
+  $('timer-caption').textContent = `第 ${identity.stationNumber} 站・第 ${s.stationNumber} 輪`;
+  $('station-topic').textContent = identity.stationName || '未設定考站名稱';
+  $('student-caption').textContent = identity.studentName || '未設定學員';
+  $('dial-progress').style.strokeDashoffset = String(100 * (1 - s.phaseRemainingMs / s.phaseDurationMs));
+  $('dial-message').textContent = s.status === 'idle' ? '按下開始，先讀題 1 分鐘' : s.status === 'paused' ? '已暫停所有階段計時' : s.phaseId === 'exam' ? (warning ? '最後 1 分鐘' : '作答第 7 分鐘將提醒') : s.phaseId === 'feedback' ? '接著：換站＋讀下一題 1 分鐘' : '接著：作答 8 分鐘';
+  $('timer-notice').textContent = s.status === 'paused' ? '按「繼續計時」恢復考場流程。' : warning ? '作答已經過 7 分鐘，剩下 1 分鐘。' : s.phaseId === 'feedback' ? '作答時間到！請停止作答，開始回饋。' : s.phaseId === 'reading' ? (s.stationNumber === 1 ? '請考生閱讀題目，準備開始作答。' : '請換站並閱讀下一題，共 1 分鐘。') : '作答時間到，將自動進入 2 分鐘回饋。';
+  $('start-label').textContent = s.status === 'running' ? '暫停計時' : s.status === 'paused' ? '繼續計時' : '開始本站讀題';
+  $('start-icon').setAttribute('href', s.status === 'running' ? '#i-pause' : '#i-play');
+  $('reset').disabled = s.status === 'idle';
+  $('elapsed').textContent = format(Math.floor(s.examElapsedMs / 1000) * 1000);
+  $('total-line').replaceChildren(document.createTextNode('考試剩餘 '), Object.assign(document.createElement('strong'), {textContent:format(s.examRemainingMs)}));
+  $('reading-separate').classList.toggle('active', s.phaseId === 'reading');
+  [...$('timeline').children].forEach((node,i) => {
+    node.classList.toggle('active', i + 1 === s.phaseIndex);
+    node.classList.toggle('complete', i + 1 < s.phaseIndex);
+  });
+  document.title = active ? `${shown} · 第${identity.stationNumber}站 ${s.phaseLabel}` : 'OSCE 考官計時器';
+  const stateKey = `${s.status}-${s.stationNumber}-${s.phaseIndex}`;
+  if (lastAnnounced !== stateKey) { if(s.status === 'paused') announce('計時已暫停。'); lastAnnounced = stateKey; }
+  if (allowAlerts && previous && (previous.status === 'running' || s.status === 'running')) {
+    const cue = latestAlert(previous.absoluteElapsedMs, s.absoluteElapsedMs);
+    if (cue) alertUser(cue.text, cue.kind);
+  }
+  previous = s;
+  if (s.status === 'running' && now - savedAt > 1000) { savedAt = now; persist(); }
+  return s;
+}
+async function toggleTimer() {
+  if (timer.status === 'running') {
+    timer.pause(); render(); persist(); await releaseWake();
+    if ('speechSynthesis' in window) speechSynthesis.cancel();
+    $('wake-description').textContent = '計時時盡量避免螢幕休眠';
+    return;
+  }
+  const beginning = timer.status === 'idle';
+  timer.start(); render(); persist();
+  await unlockAudio();
+  if (timer.status === 'running') {
+    if (beginning) { beep(); say(`第 ${identity.stationNumber} 站，請閱讀題目，時間 1 分鐘。`); announce('開始讀題，時間 1 分鐘。'); }
+    requestWake();
+  }
+}
+$('start').addEventListener('click', toggleTimer);
+$('reset').addEventListener('click', () => $('reset-dialog').showModal());
+$('reset-dialog').addEventListener('close', () => { if ($('reset-dialog').returnValue === 'reset') reset(); });
+function reset() {
+  timer.reset(); previous = null; lastShown = ''; releaseWake();
+  if ('speechSynthesis' in window) speechSynthesis.cancel();
+  buildTimeline(); render(); persist(); announce('已重設為第 1 輪讀題。');
+  $('wake-description').textContent = 'wakeLock' in navigator ? '計時時盡量避免螢幕休眠' : '此瀏覽器不支援，請調整自動鎖定設定';
+}
+for (const key of Object.keys(options)) $(key).addEventListener('change', async () => {
+  options[key] = $(key).checked; persist();
+  if (key === 'awake') options.awake ? requestWake() : releaseWake();
+  if (key === 'sound' && options.sound) await unlockAudio();
+  if (key === 'voice' && !options.voice && 'speechSynthesis' in window) speechSynthesis.cancel();
+});
+for (const [id,key] of [['station-number','stationNumber'],['station-name','stationName'],['student-name','studentName']]) {
+  $(id).addEventListener('change', () => {
+    if (key === 'stationNumber') {
+      const n = Number($(id).value);
+      identity[key] = Number.isInteger(n) && n >= 1 && n <= 999 ? n : identity[key];
+      $(id).value = identity[key];
+    } else identity[key] = $(id).value.trim().slice(0,40);
+    render(); persist();
+  });
+}
+$('test-sound').addEventListener('click', async () => {
+  if (!options.sound && !options.voice) { toast('請先開啟提示音或語音提醒。'); return; }
+  await unlockAudio(); beep(); say('作答已經過 7 分鐘，剩下 1 分鐘。');
+  toast(options.sound ? '提示音測試中，請確認裝置音量。' : '語音提醒測試中。');
+});
+$('fullscreen').addEventListener('click', async () => {
+  try {
+    if (document.fullscreenElement) await document.exitFullscreen();
+    else if (document.querySelector('.page-shell').requestFullscreen) await document.querySelector('.page-shell').requestFullscreen();
+    else toast('此瀏覽器不支援全螢幕，可將網頁加入主畫面使用。');
+  } catch { toast('無法進入全螢幕，請使用瀏覽器的全螢幕選項。'); }
+});
+document.addEventListener('fullscreenchange', () => { $('fullscreen').querySelector('span').textContent = document.fullscreenElement ? '離開全螢幕' : '全螢幕'; });
+document.addEventListener('keydown', e => {
+  if (e.code === 'Space' && !e.repeat && !['INPUT','SELECT','BUTTON','TEXTAREA','A','SUMMARY'].includes(document.activeElement?.tagName) && !$('reset-dialog').open) { e.preventDefault(); toggleTimer(); }
+});
+document.addEventListener('visibilitychange', () => { render(); persist(); if (!document.hidden) requestWake(); });
+window.addEventListener('pagehide', persist);
+buildTimeline();
+render(Date.now(), false);
+if (timer.status === 'running') { toast('已恢復計時。請點「測試提醒」啟用此頁面的提示音。'); requestWake(); }
+setInterval(render, 100);
+</script>
+</body>
+</html>
