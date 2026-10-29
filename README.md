@@ -1,5 +1,9 @@
 # OSCE 考官計時器
 
+**正式網站：[開啟 OSCE 考官計時器](https://osce-timer-hyl-in.vercel.app/)**
+
+手機直接開啟網址即可使用。下載單檔 HTML 或完整交付包，請見 [Releases](https://github.com/hsyulin-maker/osce-timer/releases)。
+
 第 5 版・兒童醫院風格。為考官在手機上操作設計，繁體中文、大字倒數，搭配柔和配色與純 CSS 小熊、雲朵和星星。
 
 ## 計時流程
@@ -26,6 +30,8 @@ python -m http.server 8000
 ## 發布
 
 本專案是純靜態網站，內含 Vercel 設定：Framework 選 Other，不需 Build Command，Output Directory 為 `.`。
+
+目前正式網站已發布。GitHub 自動部署尚未連接，後續更新原始碼時仍需另外部署至 Vercel。
 
 ## 版權
 
